@@ -1,9 +1,11 @@
+import Pokemons from "../components/layouts/Pokemons";
+
 const HomeScreen = () => {
   return (
-    <>
-      <h1>Page d'accueil</h1>
-    </>
+    <div>
+      <Pokemons />
+    </div>
   );
-};
+}
 
 export default HomeScreen;

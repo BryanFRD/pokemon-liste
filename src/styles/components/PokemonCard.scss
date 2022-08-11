@@ -1,0 +1,15 @@
+.pokemon-card {
+  width: 96px;
+  height: 96px;
+  .infos {
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.25s;
+    background-color: #363636bf;
+    z-index: 50;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

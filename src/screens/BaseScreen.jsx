@@ -1,12 +1,19 @@
 import { Outlet } from 'react-router-dom'
+import NavBar from '../components/layouts/NavBar';
 
 const BaseScreen = () => {
   return (
-    <div>
+    <>
+      <header>
+        <NavBar />
+      </header>
       <main className="container">
         <Outlet />
       </main>
-    </div>
+      <footer>
+        
+      </footer>
+    </>
   );
 }
 

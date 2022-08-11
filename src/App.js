@@ -23,13 +23,12 @@ function App() {
               <AboutScreen />
             </Suspense>
           } />
-          
-          <Route path="*" element={
+        </Route>
+        <Route path="*" element={
             <Suspense fallback={<LoadingSpinner />}>
               <NotFoundScreen />
             </Suspense>
           } />
-        </Route>
       </Routes>
     </BrowserRouter>
   );
