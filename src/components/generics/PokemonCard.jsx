@@ -5,11 +5,12 @@ const PokemonCard = ({url}) => {
   const [pokemon, setPokemon] = useState(null);
   const [pokemonSprites, setPokemonSprites] = useState("");
   useEffect(() => {
-    axios.get(url).then(({data}) => setPokemon(data));
-  }, []);
+    if(url)
+      axios.get(url).then(({data}) => setPokemon(data));
+  }, [url]);
   useEffect(() => {
     if(pokemon)
-      axios.get(pokemon.forms[0].url).then(({data}) => setPokemonSprites(data.sprites));
+      axios.get(pokemon?.forms[0]?.url).then(({data}) => setPokemonSprites(data.sprites));
   }, [pokemon]);
   
   return (
