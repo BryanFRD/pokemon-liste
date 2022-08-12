@@ -6,7 +6,7 @@ const PokemonCard = ({url}) => {
   const [pokemonSprites, setPokemonSprites] = useState("");
   useEffect(() => {
     axios.get(url).then(({data}) => setPokemon(data));
-  });
+  }, []);
   useEffect(() => {
     if(pokemon)
       axios.get(pokemon.forms[0].url).then(({data}) => setPokemonSprites(data.sprites));
