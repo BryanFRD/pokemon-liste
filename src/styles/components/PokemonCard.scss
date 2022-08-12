@@ -1,15 +1,26 @@
 .pokemon-card {
+  position: relative;
+  display: flex;
   width: 96px;
   height: 96px;
   .infos {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: hidden;
     top: 0;
     left: 0;
-    opacity: 0;
-    transition: opacity 0.25s;
+    transition: ease .5s;
+    max-height: 0%;
+    top: 50%;
     background-color: #363636bf;
     z-index: 50;
-    &:hover {
-      opacity: 1;
-    }
   }
+  &:hover .infos {
+    top: 0%;
+    max-height: 100%;
+  }
+  
 }

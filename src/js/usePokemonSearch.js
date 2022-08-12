@@ -16,10 +16,14 @@ const usePokemonSearch = (offset) => {
       url: 'https://pokeapi.co/api/v2/pokemon',
       params: {limit: 100, offset: offset},
       cancelToken: new axios.CancelToken((c) => cancel = c)
-    }).then(res => {
-      setPokemons(prevPokemons => [...new Set([...prevPokemons, ...res.data.results])]);
-      setNext(res.data.next ?? false);
-      setLoading(false);
+    }).then(async res => {
+      res.data.results.forEach(pokemon => {
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`).then(pokemon => {
+          setPokemons(prevPokemons => [...prevPokemons, pokemon.data])
+          setNext(res.data.next ?? false);
+          setLoading(false);
+        });
+      });
     }).catch(err => {
       if(axios.isCancel(err))
         return;
@@ -28,6 +32,20 @@ const usePokemonSearch = (offset) => {
     
     return () => cancel();
   }, [offset]);
+  
+  useEffect(() => {
+    pokemons.sort((a, b) => a.id - b.id);
+    pokemons.forEach(pokemon => {
+      if(!pokemon.hasSpecies){
+        if(!pokemon.species.url)
+          return;
+        axios.get(pokemon.species.url).then(res => {
+          Object.assign(pokemon, res.data);
+          pokemon.hasSpecies = true;
+        });
+      }
+    });
+  }, [pokemons]);
   
   return { loading, error, pokemons, next }
 };
