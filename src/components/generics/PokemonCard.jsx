@@ -25,7 +25,7 @@ const PokemonCard = ({url, type}) => {
     </div>)
     )}
     {(type === 'advanced' &&
-      <div className='pokemon-card w-100 h-100 border border-dark rounded p-2'>
+      <div className='pokemon-card w-100 h-100 border rounded p-2'>
         {(pokemonSprites && <img src={pokemonSprites.front_default} alt={pokemon.name} className="img-fluid" />)}
       </div>)}
   </>);

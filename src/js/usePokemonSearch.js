@@ -17,7 +17,7 @@ const usePokemonSearch = (offset) => {
       params: {limit: 100, offset: offset},
       cancelToken: new axios.CancelToken((c) => cancel = c)
     }).then(res => {
-      setPokemons(prevPokemons => [...new Set([...prevPokemons, ...res.data.results.map(pokemon => pokemon.url)])]);
+      setPokemons(prevPokemons => [...new Set([...prevPokemons, ...res.data.results])]);
       setNext(res.data.next ?? false);
       setLoading(false);
     }).catch(err => {
