@@ -10,12 +10,12 @@ const usePokemonSearch = (offset) => {
   useEffect(() => {
     setLoading(true);
     setError(false);
-    let cancel;
+    const controller = new AbortController();
     axios({
       method: 'GET',
       url: 'https://pokeapi.co/api/v2/pokemon',
       params: {limit: 100, offset: offset},
-      cancelToken: new axios.CancelToken((c) => cancel = c)
+      signal: controller.signal
     }).then(async res => {
       res.data.results.forEach(pokemon => {
         axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`).then(pokemon => {
@@ -30,11 +30,10 @@ const usePokemonSearch = (offset) => {
       setError(true);
     });
     
-    return () => cancel();
+    return () => controller.abort();
   }, [offset]);
   
   useEffect(() => {
-    pokemons.sort((a, b) => a.id - b.id);
     pokemons.forEach(pokemon => {
       if(!pokemon.hasSpecies){
         if(!pokemon.species.url)

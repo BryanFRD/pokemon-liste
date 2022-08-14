@@ -90,14 +90,15 @@ const Pokemons = (props) => {
       <div className='d-flex flex-wrap gap-3'>
         {
           pokemons
-          .filter((pokemon) => (!search || pokemon.name.toLowerCase().includes(search)) &&
+          .filter((pokemon) => (!search || pokemon.displayName?.toLowerCase().includes(search)) &&
             (genera === 'Aucune' || pokemon.generation?.name?.replace('generation-', '').toUpperCase() === genera))
+          .sort((a, b) => a.id - b.id)
           .map((pokemon, index) => <PokemonCard key={'pokemon-' + index} pokemon={pokemon} type={type} lang={lang} />)
         }
       </div>
       {(offset > pokemons.length - 100) || (<div className='text-center' ref={loader}><LoadingSpinner /></div>)}
       <div className="my-5 text-center">
-        {(loading && (<LoadingSpinner />))}
+        {((loading) && (<LoadingSpinner />))}
         {(error && <span>{error}</span>)}
       </div>
     </div>

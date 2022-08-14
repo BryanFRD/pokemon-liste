@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import LoadingSpinner from './components/layouts/LoadingSpinner';
 import BaseScreen from './screens/BaseScreen';
+import PokemonInfoScreen from './screens/PokemonInfoScreen';
 
 const HomeScreen = React.lazy(() => import('./screens/HomeScreen'));
 const AboutScreen = React.lazy(() => import('./screens/AboutScreen'));
@@ -17,12 +18,16 @@ function App() {
               <HomeScreen />
             </Suspense>
           } />
-          
           <Route path="/about" element={
             <Suspense fallback={<LoadingSpinner />}>
               <AboutScreen />
             </Suspense>
           } />
+          <Route path='/pokemon-info/:id' element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <PokemonInfoScreen />
+            </Suspense>
+          }/>
         </Route>
         <Route path="*" element={
             <Suspense fallback={<LoadingSpinner />}>

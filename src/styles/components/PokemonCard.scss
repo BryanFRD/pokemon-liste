@@ -17,10 +17,10 @@
     top: 50%;
     background-color: #363636bf;
     z-index: 50;
+    pointer-events: none;
   }
   &:hover .infos {
     top: 0%;
     max-height: 100%;
   }
-  
 }

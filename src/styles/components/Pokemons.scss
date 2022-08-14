@@ -1,7 +1,6 @@
 .search-pokemon {
   border-width: 0 0 2px 0;
 }
-
 .display-type {
   display: flex;
   justify-content: space-around;
@@ -12,11 +11,7 @@
   user-select: none;
   img {
     filter: grayscale(1);
-    &:hover {
-      filter: grayscale(0);
-      cursor:pointer;
-    }
-    &.active {
+    &:hover, &.active {
       filter: grayscale(0);
     }
   }
